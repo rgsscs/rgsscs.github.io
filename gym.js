@@ -73,9 +73,11 @@ class Game {
         document.onmousemove = this.mouseMoveHandler.bind(this);
 
 
-        ///todo
+        
         document.ontouchstart = this.touchHandler.bind(this);
-        document.onmousedown = this.touchHandler.bind(this);
+        
+        // only use mousedown for testing touchscreen on computer
+        //document.onmousedown = this.touchHandler.bind(this);
 
 		// Sets up the array of keystates
 		this.keystates = {};
