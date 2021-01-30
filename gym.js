@@ -210,7 +210,7 @@ class Game {
 				[
                     "Hello, do you want to learn more about ICS2O1 and ICS3C1?",
 					"We learn how to make programs using a language named Python.",
-                    "We learn how to make neat games, using Pygame. We make item collection games, and a Zelda-like battle game.",
+                    "We learn how to make Pygame games. We can do item collection games, and a Zelda-like battle game.",
                     "We also learn about computer hardware, and how computers impact people, and the environment around us."
                     
 					/*"Hello, do you want to learn\nmore about ICS2O1 and ICS3C1?",
