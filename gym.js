@@ -127,12 +127,13 @@ class Game {
 				// Set of dialogue
 				[
                     "Facebook was actually my idea. Zuckerberg just took my idea when I bragged too much one class.",
-                    "Oliver, a grade 11 student,  did all the hard work for this program. I just Zuckerberg'd him.",
+                    "Oliver, a grade 11 student, did all the hard work for this program. I just Zuckerberg'd him.",
 					"My last student's startup was sold for $600 million US. How much did yours go for?",
-					"Another student wanted to do an IPO. Told me she's the new GameStop. ",
+					"Another student wanted to do an IPO. Told me she's the new GameStop.",
                     "Yeah, I pretty much taught Bill Gates everything he knows...",
                     "...taught Jeff Bezos everything too. Even the world domination part.",
-                    "World domination used to be in the curriculum. Had to remove it once Bezzy took it too far."
+                    "World domination used to be in the curriculum. Had to remove it once Bezzy took it too far.",
+                    "I thought of Netflix before there was ever such as thing as the Internet."
                     /*Facebook was actually my idea.\nZuckerberg just took my idea\nwhen I bragged too much one class.",
                     "Oliver, a grade 11 student, \ndid all the hard work for this\nprogram. I just Zuckerberg'd him.",
 					"My last student's startup was sold\nfor $600 million US.\nHow much did yours go for?",
