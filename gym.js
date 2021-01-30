@@ -22,13 +22,15 @@ class Game {
 		this.viewportPosition = new Vector2();
         this.mousePosition = new Vector2();
         
-        // used for point and click/phone
+        // used for touch
         this.destinationPoint = new Vector2();
 
+        this.bounds = [new Vector2(), new Vector2(1024, 768)];
+
+        // change canvas size for small screens
         if (window.outerWidth >= 1024 && window.outerHeight >= 768){
-            this.bounds = [new Vector2(), new Vector2(1024, 768)];
-        } else {
-            this.bounds = [new Vector2(), new Vector2(window.outerWidth, window.outerHeight)];
+            gameCanvas.width = window.outerWidth - 20;
+            gameCanvas.height = window.outerHeight - 20;
         }
         
 		this.floorTexture = new Image();
@@ -41,6 +43,7 @@ class Game {
 
         ///todo
         document.ontouchstart = this.touchHandler.bind(this);
+        document.onmousedown = this.touchHandler.bind(this);
 
 		// Sets up the array of keystates
 		this.keystates = {};
@@ -242,13 +245,12 @@ class Game {
 	mouseMoveHandler(e) {
 		var rect = game.canvas.getBoundingClientRect();
 		game.mousePosition.x = e.clientX - rect.left;
-		game.mousePosition.y = e.clientY - rect.top;
+        game.mousePosition.y = e.clientY - rect.top;
 	}
 
     touchHandler(e){
         var rect = game.canvas.getBoundingClientRect();
-		game.destinationPoint.x = e.clientX - rect.left;
-		game.destinationPoint.y = e.clientY - rect.top;
+		game.destinationPoint = this.StWPoint(new Vector2(e.clientX - rect.left, e.clientY - rect.top));
     }
 
 	// Function to get whether or not a key is pressed currently
@@ -278,9 +280,6 @@ class Game {
 
 	// Main game loop
 	update() {
-
-        this.autoMove();
-
 		// Update all entities
 		for (let e of this.entities) {
 			e.update();
@@ -545,7 +544,7 @@ class Player extends Entity {
 	}
 
 	update() {
-
+        let destinationPoint = game.destinationPoint;
 		// Movement
 		if (game.getKey("w")) {
 			this.velocity.y -= this.movementSpeed;
@@ -562,33 +561,37 @@ class Player extends Entity {
 
         // handling touchscreens
         if (destinationPoint.y != 0 && destinationPoint.x != 0) {
-            if (this.velocity.y > destinationPoint.y) {
-                if (Math.abs(this.velocity.y - destinationPoint.y) < this.movementSpeed){
-                    this.velocity.y = destinationPoint.y;
+            console.log('py: ' + this.position.y);
+            console.log('dy: ' + destinationPoint.y);
+            console.log('px: ' + this.position.x);
+            console.log('dx: ' + destinationPoint.x);
+            if (this.position.y > destinationPoint.y) {
+                if (Math.abs(this.position.y - destinationPoint.y) < this.movementSpeed){
+                    this.position.y = destinationPoint.y;
                 }
                 else {
                     this.velocity.y -= this.movementSpeed;
                 }
             }
-            if (this.velocity.y < destinationPoint.y) {
-                if (Math.abs(this.velocity.y - destinationPoint.y) < this.movementSpeed){
-                    this.velocity.y = destinationPoint.y;
+            if (this.position.y < destinationPoint.y) {
+                if (Math.abs(this.position.y - destinationPoint.y) < this.movementSpeed){
+                    this.position.y = destinationPoint.y;
                 }
                 else {
                     this.velocity.y += this.movementSpeed;
                 }
             }
-            if (this.velocity.x > destinationPoint.x) {
-                if (Math.abs(this.velocity.x - destinationPoint.x) < this.movementSpeed){
-                    this.velocity.x = destinationPoint.x;
+            if (this.position.x > destinationPoint.x) {
+                if (Math.abs(this.position.x - destinationPoint.x) < this.movementSpeed){
+                    this.position.x = destinationPoint.x;
                 }
                 else {
                     this.velocity.x -= this.movementSpeed;
                 }
             }
-            if (this.velocity.x < destinationPoint.x) {
-                if (Math.abs(this.velocity.x - destinationPoint.x) < this.movementSpeed){
-                    this.velocity.x = destinationPoint.x;
+            if (this.position.x < destinationPoint.x) {
+                if (Math.abs(this.position.x - destinationPoint.x) < this.movementSpeed){
+                    this.position.x = destinationPoint.x;
                 }
                 else {
                     this.velocity.x += this.movementSpeed;
