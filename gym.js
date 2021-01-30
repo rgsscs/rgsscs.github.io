@@ -62,12 +62,13 @@ class Game {
 		document.onkeyup = this.keyUpHandler.bind(this);
         document.onmousemove = this.mouseMoveHandler.bind(this);
 
+        if (window.innerWidth <= 700) {
+            //document.ontouchstart = this.touchHandler.bind(this);
+                    
+            document.onmousedown = this.touchHandler.bind(this);
+        }
+        
 
-        
-        document.ontouchstart = this.touchHandler.bind(this);
-        
-        // only use mousedown for testing touchscreen on computer
-        document.onmousedown = this.touchHandler.bind(this);
 
 		// Sets up the array of keystates
 		this.keystates = {};
@@ -125,12 +126,19 @@ class Game {
 				700,
 				// Set of dialogue
 				[
-                    "Facebook was actually my idea.\nZuckerberg just took my idea\nwhen I bragged too much one class.",
+                    "Facebook was actually my idea. Zuckerberg just took my idea when I bragged too much one class.",
+                    "Oliver, a grade 11 student,  did all the hard work for this program. I just Zuckerberg'd him.",
+					"My last student's startup was sold for $600 million US. How much did yours go for?",
+					"Another student wanted to do an IPO. Told me she's the new GameStop. ",
+                    "Yeah, I pretty much taught Bill Gates everything he knows...",
+                    "...taught Jeff Bezos everything too. Even the world domination part.",
+                    "World domination used to be in the curriculum. Had to remove it once Bezzy took it too far."
+                    /*Facebook was actually my idea.\nZuckerberg just took my idea\nwhen I bragged too much one class.",
                     "Oliver, a grade 11 student, \ndid all the hard work for this\nprogram. I just Zuckerberg'd him.",
 					"My last student's startup was sold\nfor $600 million US.\nHow much did yours go for?",
 					"Another student wanted to do an IPO.\nI told her to do go on reddit\nand tell people her company's\nthe new GameStop.",
                     "Yeah, I pretty much taught Bill\nGates everything he knows...",
-                    "...taught Jeff Bezos everything\ntoo. Too bad he wants to\ntake over the world."
+                    "...taught Jeff Bezos everything\ntoo. Too bad he wants to\ntake over the world."*/
 				],
 				// Behaviour script; personalized for each npc to get special behaviour
 				function () {
@@ -309,8 +317,6 @@ class Game {
         if (game.useKeyboard == false){
             var rect = game.canvas.getBoundingClientRect();
 
-
-
             game.destinationPoint = this.StWPoint(new Vector2(e.clientX - rect.left, e.clientY - rect.top));
 
             if (game.destinationPoint.x > 0 && game.destinationPoint.y > 0 && game.destinationPoint.x < game.screenw && game.destinationPoint.y < game.screenh){
@@ -320,8 +326,9 @@ class Game {
                 game.destinationPoint = new Vector2();
                 game.touched = false;
             }
-
         }
+        
+        
     }
 
 	// Function to get whether or not a key is pressed currently
