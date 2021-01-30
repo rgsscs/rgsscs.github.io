@@ -74,7 +74,7 @@ class Game {
 		this.shoppingCart = [];
 		this.items = {
 			courseInfo: new ItemData("Course Information", "images/booksmall.svg", 0),
-			coupon: new ItemData("\"Final Grade Coupon\" - Uhh...keep it?", "images/coupon.svg", 0, true)
+			coupon: new ItemData("\"Get 100% Coupon\"     I should probably save this.", "images/coupon.svg", 0, true)
 		};
 
 		// Creating 
@@ -293,6 +293,7 @@ class Game {
 	// Sets a key to true if pressed
 	keyDownHandler(e) {
         game.useKeyboard = true;
+        game.touched = false;
 		this.keystates[e.key] = true;
 		this.keysDown[e.key] = true;
 		if (e.keyCode == 32 && e.target == document.body) {
