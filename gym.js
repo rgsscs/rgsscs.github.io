@@ -40,7 +40,7 @@ class Game {
         document.onmousemove = this.mouseMoveHandler.bind(this);
 
         ///todo
-        document.onmousedown = this.mouseDownHandler.bind(this);
+        document.ontouchstart = this.touchHandler.bind(this);
 
 		// Sets up the array of keystates
 		this.keystates = {};
@@ -245,14 +245,10 @@ class Game {
 		game.mousePosition.y = e.clientY - rect.top;
 	}
 
-    mouseDownHandler(e){
+    touchHandler(e){
         var rect = game.canvas.getBoundingClientRect();
 		game.destinationPoint.x = e.clientX - rect.left;
 		game.destinationPoint.y = e.clientY - rect.top;
-    }
-
-    autoMove(){
-    
     }
 
 	// Function to get whether or not a key is pressed currently
@@ -282,6 +278,9 @@ class Game {
 
 	// Main game loop
 	update() {
+
+        this.autoMove();
+
 		// Update all entities
 		for (let e of this.entities) {
 			e.update();
@@ -546,6 +545,7 @@ class Player extends Entity {
 	}
 
 	update() {
+
 		// Movement
 		if (game.getKey("w")) {
 			this.velocity.y -= this.movementSpeed;
@@ -558,7 +558,43 @@ class Player extends Entity {
 		}
 		if (game.getKey("d")) {
 			this.velocity.x += this.movementSpeed;
-		}
+        }
+
+        // handling touchscreens
+        if (destinationPoint.y != 0 && destinationPoint.x != 0) {
+            if (this.velocity.y > destinationPoint.y) {
+                if (Math.abs(this.velocity.y - destinationPoint.y) < this.movementSpeed){
+                    this.velocity.y = destinationPoint.y;
+                }
+                else {
+                    this.velocity.y -= this.movementSpeed;
+                }
+            }
+            if (this.velocity.y < destinationPoint.y) {
+                if (Math.abs(this.velocity.y - destinationPoint.y) < this.movementSpeed){
+                    this.velocity.y = destinationPoint.y;
+                }
+                else {
+                    this.velocity.y += this.movementSpeed;
+                }
+            }
+            if (this.velocity.x > destinationPoint.x) {
+                if (Math.abs(this.velocity.x - destinationPoint.x) < this.movementSpeed){
+                    this.velocity.x = destinationPoint.x;
+                }
+                else {
+                    this.velocity.x -= this.movementSpeed;
+                }
+            }
+            if (this.velocity.x < destinationPoint.x) {
+                if (Math.abs(this.velocity.x - destinationPoint.x) < this.movementSpeed){
+                    this.velocity.x = destinationPoint.x;
+                }
+                else {
+                    this.velocity.x += this.movementSpeed;
+                }
+            }
+        }
 
 		// Sets rotation based on velocity
 		if (this.velocity.x != 0 || this.velocity.y != 0) {
