@@ -49,20 +49,20 @@ class Game {
 
         
         this.useKeyboard = false;
-        let screenw = 1024;
-        let screenh = 768;
+        this.screenw = 1024;
+        this.screenh = 768;
         
         if (window.innerWidth <= 700){
-            screenw = 700
+            this.screenw = 700
         }
         
         if (window.innerHeight <= 500){
-            screenw = 500;
+            this.screenw = 500;
         }
         
 
 
-        this.bounds = [new Vector2(), new Vector2(1024, 768)];
+        this.bounds = [new Vector2(), new Vector2(this.screenw, this.screenh)];
 
 		this.floorTexture = new Image();
 		this.floorTexture.src = "images/floor.png"
@@ -77,7 +77,7 @@ class Game {
         document.ontouchstart = this.touchHandler.bind(this);
         
         // only use mousedown for testing touchscreen on computer
-        //document.onmousedown = this.touchHandler.bind(this);
+        document.onmousedown = this.touchHandler.bind(this);
 
 		// Sets up the array of keystates
 		this.keystates = {};
@@ -318,8 +318,19 @@ class Game {
         
         if (game.useKeyboard == false){
             var rect = game.canvas.getBoundingClientRect();
+
+
+
             game.destinationPoint = this.StWPoint(new Vector2(e.clientX - rect.left, e.clientY - rect.top));
-            game.touched = true;
+
+            if (game.destinationPoint.x > 0 && game.destinationPoint.y > 0 && game.destinationPoint.x < game.screenw && game.destinationPoint.y < game.screenh){
+                game.touched = true;
+            }
+            else{
+                game.destinationPoint = new Vector2();
+                game.touched = false;
+            }
+
         }
     }
 
@@ -412,7 +423,6 @@ class Game {
             
 			let text = String(this.player.targetEntity.getInteractText());
             let words = text.split(' ');
-            console.log(words);
 			let rowNumber = 0;
 			while ( words.length > 0){
                 let currentLine = '';
@@ -431,7 +441,6 @@ class Game {
                 }
                 this.ctx.fillText(currentLine, 40, 50 + rowNumber * 22, 300);
                 rowNumber++;
-                console.log(words);
 			}
 
 			// this.ctx.fillText(this.player.targetEntity.getInteractText(), 40, 50, 432);
@@ -603,7 +612,6 @@ class Entity {
         console.log('distance: ' + (touchPoint.x - this.position.x)**2 + (touchPoint.y - this.position.y)**2)*/
 		// Yeah ik really long function chain, basically gets distance between 2 circles and compares with the sum of their sizes
 		if ( (touchPoint.x - this.position.x)**2 + (touchPoint.y - this.position.y)**2 <= this.size ** 2) {
-            console.log('yes')
 			return true;
 		} else {
 			return false;
