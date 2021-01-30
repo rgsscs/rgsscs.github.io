@@ -240,7 +240,7 @@ class Game {
 				300,
 				100,
 				[
-                    "Hello, do you want to learn more ICS3U1? This game was made using many of those concepts.",
+                    "Hello, do you want to learn about ICS3U1? This game was made using many of those concepts.",
 					"This year we learned how to make web programs: Basic HTML, JavaScript,and canvas graphics.",
                     "We learned the skills to make TypeRacer: Arrays, string functions, random numbers.",
                     "We learned about array algorithms: searching, data manipulation, sorting.",
