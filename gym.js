@@ -3,6 +3,8 @@ let game;
 let inGameDisplay;
 let itemDisplay;
 
+let delayTimer = null;
+
 // Initializes game on document load
 window.addEventListener("load", function () {
 	gameCanvas = document.getElementById("gameCanvas");
@@ -11,6 +13,24 @@ window.addEventListener("load", function () {
 
 	game = new Game(gameCanvas);
 });
+
+// used for touch interaction so text moves without retapping the entity
+function startGlobalDelay(){
+    if(!delayTimer && game.useKeyboard == false){
+        delayTimer = setInterval(stopGlobalDelay, 3000);
+    }
+}
+function stopGlobalDelay(){
+    if (game.useKeyboard == false){
+        if (game.player.targetEntity != null){
+            game.player.targetEntity.interact();
+            game.player.targetEntity = null;
+        }
+        clearInterval(delayTimer);
+        delayTimer = null;
+    }
+}
+
 
 // Defines main game class
 class Game {
@@ -22,8 +42,13 @@ class Game {
 		this.viewportPosition = new Vector2();
         this.mousePosition = new Vector2();
         
+
         // used for touch
         this.destinationPoint = new Vector2();
+        this.touched = false;
+
+        
+        this.useKeyboard = false;
 
         this.bounds = [new Vector2(), new Vector2(1024, 768)];
 
@@ -40,6 +65,7 @@ class Game {
 		document.onkeydown = this.keyDownHandler.bind(this);
 		document.onkeyup = this.keyUpHandler.bind(this);
         document.onmousemove = this.mouseMoveHandler.bind(this);
+
 
         ///todo
         document.ontouchstart = this.touchHandler.bind(this);
@@ -101,12 +127,12 @@ class Game {
 				700,
 				// Set of dialogue
 				[
-					"My last student's startup was sold\nfor $600 million US.\nHow much did yours go for?",
-					"Should my other student do an IPO\nor SPAC...the stock market these\ndays is so hard to predict.",
-                    "Yeah, I pretty much taught Bill\nGates everything he knows.",
-                    "Yup, taught Jeff Bezos too.\nExcept that taking over\nthe world bit...",
                     "Facebook was actually my idea.\nZuckerberg just took my idea\nwhen I bragged too much one class.",
-                    "Oliver, a grade 11 student, \ndid all the hard work for this\nprogram. I just Zuckerberg'd him."
+                    "Oliver, a grade 11 student, \ndid all the hard work for this\nprogram. I just Zuckerberg'd him.",
+					"My last student's startup was sold\nfor $600 million US.\nHow much did yours go for?",
+					"Another student wanted to do an IPO.\nI told her to do go on reddit\nand tell people her company's\nthe new GameStop.",
+                    "Yeah, I pretty much taught Bill\nGates everything he knows...",
+                    "...taught Jeff Bezos everything\ntoo. Too bad he wants to\ntake over the world."
 				],
 				// Behaviour script; personalized for each npc to get special behaviour
 				function () {
@@ -149,7 +175,7 @@ class Game {
                     "In Grade 12, you can take ICS4U1.\nHowever, Grade 11 ICS3U1 is\na prerequisite."
 				],
 				function() { 
-					this.walkTo(game.player.position);
+					//this.walkTo(game.player.position);
 				},
 				60,
 				{ movementSpeed: 0.3 }
@@ -186,11 +212,11 @@ class Game {
 				300,
 				100,
 				[
-					"Hello, do you want to learn more about ICS3U1?",
-					"This year we learned how to make programs in JavaScript.\nThis web page game is based on a student's work.\nTopics: Basic HTML, variables, if statements, timer loops",
-                    "This year we also learned the skills to make TypeRacer.\nTopics: Arrays, string functions,\nrandom numbers, functions",
-                    "We also learn about array algorithms:\nsearching, data manipulation, sorting.",
-					"We also learn about computer systems,\n and how computers impact people\n, and the environment around us."
+					"Hello, do you want to learn more\nabout ICS3U1?",
+					"This year we learned how to make\nweb programs: Basic HTML,\nJavaScript,and canvas\ngraphics.",
+                    "This year we  learned the skills\nto make TypeRacer:\nArrays, string functions,\nrandom numbers.s",
+                    "We also learn about array\nalgorithms: searching, data\nmanipulation, sorting.",
+					"We also learn about computer\nsystems, and how computers\nimpact people, and\nthe environment around us."
 				],
 				function () {},
 				20,
@@ -207,10 +233,10 @@ class Game {
 				600,
 				100,
 				[
-					"Hello, do you want to learn more about ICS4U1?\nYou need to have taken ICS3U1 first.",
-                    "The main topic is object-oriented programming.\nWe do 2D arrays so we can make games like\nSimCity or Chess.",
-                    "We also spend a lot of time learning about algorithms:\nbetter searches and sorts, recursion\nand some backtracking as well.",
-					"We also learn about career opportunities,\nand society impacts of technology."
+					"Hello, do you want to learn more\nabout ICS4U1? You need to have\ntaken ICS3U1 first.",
+                    "The main topic is object-oriented\nprogramming. We do 2D arrays\nso we can make games like\nSimCity or Chess.",
+                    "We also spend time learning about\nalgorithms: better searches\nand sorts, recursion and\nbacktracking.",
+					"We also learn about career\nopportunities, and society\nimpacts of technology."
 				],
 				function () {},
 				20,
@@ -229,6 +255,7 @@ class Game {
 
 	// Sets a key to true if pressed
 	keyDownHandler(e) {
+        game.useKeyboard = true;
 		this.keystates[e.key] = true;
 		this.keysDown[e.key] = true;
 		if (e.keyCode == 32 && e.target == document.body) {
@@ -249,8 +276,12 @@ class Game {
 	}
 
     touchHandler(e){
-        var rect = game.canvas.getBoundingClientRect();
-		game.destinationPoint = this.StWPoint(new Vector2(e.clientX - rect.left, e.clientY - rect.top));
+        game.useKeyboard = false; ///////////////////////////////////////////////// CHANGE
+        if (game.useKeyboard == false){
+            var rect = game.canvas.getBoundingClientRect();
+            game.destinationPoint = this.StWPoint(new Vector2(e.clientX - rect.left, e.clientY - rect.top));
+            game.touched = true;
+        }
     }
 
 	// Function to get whether or not a key is pressed currently
@@ -505,6 +536,24 @@ class Entity {
 		ctx.restore();
 	}
 
+    // checks for collision with the destination point to see if user touched an item
+    collideTouchPoint(touchPoint){
+
+        /*console.log('touchx: ' + touchPoint.x)
+        console.log('npcx: ' + this.position.x)
+        console.log('touchy: ' + touchPoint.y)
+        console.log('npcy: ' + this.position.y)
+        console.log('size: ' + this.size)
+        console.log('distance: ' + (touchPoint.x - this.position.x)**2 + (touchPoint.y - this.position.y)**2)*/
+		// Yeah ik really long function chain, basically gets distance between 2 circles and compares with the sum of their sizes
+		if ( (touchPoint.x - this.position.x)**2 + (touchPoint.y - this.position.y)**2 <= this.size ** 2) {
+            console.log('yes')
+			return true;
+		} else {
+			return false;
+		}
+    }
+
 	// Checks for collision against another entity
 	collideWith(other) {
 		// Yeah ik really long function chain, basically gets distance between 2 circles and compares with the sum of their sizes
@@ -559,12 +608,9 @@ class Player extends Entity {
 			this.velocity.x += this.movementSpeed;
         }
 
-        // handling touchscreens
-        if (destinationPoint.y != 0 && destinationPoint.x != 0) {
-            console.log('py: ' + this.position.y);
-            console.log('dy: ' + destinationPoint.y);
-            console.log('px: ' + this.position.x);
-            console.log('dx: ' + destinationPoint.x);
+        // handling touchscreen and mouse movement
+        //if (destinationPoint.y != 0 && destinationPoint.x != 0) {
+        if (game.touched){
             if (this.position.y > destinationPoint.y) {
                 if (Math.abs(this.position.y - destinationPoint.y) < this.movementSpeed){
                     this.position.y = destinationPoint.y;
@@ -597,6 +643,10 @@ class Player extends Entity {
                     this.velocity.x += this.movementSpeed;
                 }
             }
+
+            if ( this.position.x == destinationPoint.x && this.position.y == destinationPoint.y){
+                destinationPoint = new Vector2();
+            }
         }
 
 		// Sets rotation based on velocity
@@ -609,19 +659,23 @@ class Player extends Entity {
 		// Otherwise, looks for a collision with any other objects
 		if (this.targetEntity) {
 			if (!this.collideWith(this.targetEntity)) {
-				this.targetEntity = null
+                this.targetEntity = null
+                stopGlobalDelay();
 			}
 		} else {
 			for (let e of game.entities) {
 				if (e != this && e.interactable && this.collideWith(e)) {
-					this.targetEntity = e;
+                    if ( game.touched ){
+                        startGlobalDelay();
+                    }
+                    this.targetEntity = e;
 					break;
 				}
 			}
 		}
 
 		// Interact with target
-		if (this.targetEntity && game.getKeyDown(" ")) {
+		if (this.targetEntity && (game.getKeyDown(" ") || this.targetEntity.collideTouchPoint(destinationPoint))) {
 			this.targetEntity.interact();
 			this.targetEntity = null;
 		}
@@ -772,8 +826,10 @@ class NPC extends Entity {
 	constructor(x, y, dialogue, behavior = null, reachRange = 20, ...args) {
 		super(x, y, args[0]);
 
-		this.dialogue = dialogue;
-		this.dialogue.unshift(["Talk"])
+        this.dialogue = dialogue;
+/*        if (game.useKeyboard == true){
+            this.dialogue.unshift(["Talk"])
+        }*/
 		this.currentDialogue = 0;
 
 		this.behavior = behavior;
