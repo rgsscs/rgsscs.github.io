@@ -52,16 +52,6 @@ class Game {
         this.screenw = 1024;
         this.screenh = 768;
         
-        if (window.innerWidth <= 700){
-            this.screenw = 700
-        }
-        
-        if (window.innerHeight <= 500){
-            this.screenw = 500;
-        }
-        
-
-
         this.bounds = [new Vector2(), new Vector2(this.screenw, this.screenh)];
 
 		this.floorTexture = new Image();
