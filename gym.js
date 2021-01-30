@@ -62,14 +62,9 @@ class Game {
 		document.onkeyup = this.keyUpHandler.bind(this);
         document.onmousemove = this.mouseMoveHandler.bind(this);
 
-        if (window.innerWidth <= 700) {
-            //document.ontouchstart = this.touchHandler.bind(this);
-                    
-            document.onmousedown = this.touchHandler.bind(this);
-        }
-        
-
-
+        // used for touch
+        document.onmousedown = this.touchHandler.bind(this);
+      
 		// Sets up the array of keystates
 		this.keystates = {};
 		this.keysDown = {};
@@ -660,19 +655,7 @@ class Player extends Entity {
 
 	update() {
         let destinationPoint = game.destinationPoint;
-		// Movement
-		if (game.getKey("w")) {
-			this.velocity.y -= this.movementSpeed;
-		}
-		if (game.getKey("s")) {
-			this.velocity.y += this.movementSpeed;
-		}
-		if (game.getKey("a")) {
-			this.velocity.x -= this.movementSpeed;
-		}
-		if (game.getKey("d")) {
-			this.velocity.x += this.movementSpeed;
-        }
+
 
         // handling touchscreen and mouse movement
         //if (destinationPoint.y != 0 && destinationPoint.x != 0) {
@@ -712,6 +695,20 @@ class Player extends Entity {
 
             if ( this.position.x == destinationPoint.x && this.position.y == destinationPoint.y){
                 destinationPoint = new Vector2();
+            }
+        }else{
+       		// Movement
+            if (game.getKey("w")) {
+                this.velocity.y -= this.movementSpeed;
+            }
+            if (game.getKey("s")) {
+                this.velocity.y += this.movementSpeed;
+            }
+            if (game.getKey("a")) {
+                this.velocity.x -= this.movementSpeed;
+            }
+            if (game.getKey("d")) {
+                this.velocity.x += this.movementSpeed;
             }
         }
 
