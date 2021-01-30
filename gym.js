@@ -157,11 +157,12 @@ class Game {
 				120,
 				300,
 				[
-                    "Why are there only Computer Studies teachers at the course fair? Is this a sign?",
+                    "Why are there only Computer Studies teachers at this course fair? Is this a sign?",
                     "I'm in Grade 10, I should take ICS2O1!",
                     "No wait, I'm GOING to be in Grade 11 next year, I should take ICS3U1!",
-                    "Hold on, it's 2021. I'll be in Grade 12 next year. I should take ICS4U1!",
-                    "No...wait...no... I'm graduating... I shouldn't even be here!?!",
+                    "Hold on, it's 2021, not 2020. I'll be in Grade 12 next year. I should take ICS4U1!",
+                    "No...wait...no...I'm graduating... Am I even supposed to be here?",
+                    "I thought this was the Post-secondary Fair, where's all the free pens?"
 
                     /* "Why are there only Computer\nStudies teachers at the course\nfair? Is this a sign?",
                     "I'm in Grade 10, I should\ntake ICS2O1!",
