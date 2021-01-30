@@ -237,9 +237,9 @@ class Game {
 				300,
 				100,
 				[
-                    "Hello, do you want to learn more about ICS3U1?",
+                    "Hello, do you want to learn more ICS3U1? This game was made using many of those concepts.dd",
 					"This year we learned how to make web programs: Basic HTML, JavaScript,and canvas graphics.",
-                    "This year we  learned the skills to make TypeRacer: Arrays, string functions, random numbers.",
+                    "We also learned the skills to make TypeRacer: Arrays, string functions, random numbers.",
                     "We also learn about array algorithms: searching, data manipulation, sorting.",
                     "We also learn about computer systems, and how computers impact people, and the environment around us."
                     
@@ -268,8 +268,8 @@ class Game {
 				100,
 				[
 					"Hello, do you want to learn more about ICS4U1? You need to have taken ICS3U1 first.",
-                    "The main topic is object-oriented programming. We do 2D arrays so we can make games like SimCity or Chess.",
-                    "We also spend time learning about algorithms: better searches and sorts, recursion and backtracking.",
+                    "The main topic is object-oriented programming. We apply 2D arrays to make games like SimCity and Chess.",
+                    "We spend time learning about algorithms: better searches and sorts, recursion and backtracking.",
                     "We also learn about career opportunities, and society impacts of technology."
                     
                     /*"Hello, do you want to learn more\nabout ICS4U1? You need to have\ntaken ICS3U1 first.",
