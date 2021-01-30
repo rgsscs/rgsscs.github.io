@@ -265,6 +265,7 @@ class Game {
 				600,
 				100,
 				[
+					"Hello, do you want to learn about ICS4U1 Grade 12 Computer Science? ICS3U1 is required to take it.",
                     "The main topic is object-oriented programming. We apply 2D arrays to make games like SimCity and Chess.",
                     "We spend time learning about algorithms: better searches and sorts, recursion and backtracking.",
                     "We also learn about career opportunities, and society impacts of technology."
