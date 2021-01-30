@@ -315,7 +315,7 @@ class Game {
 	}
 
     touchHandler(e){
-        game.useKeyboard = false; ///////////////////////////////////////////////// CHANGE
+        
         if (game.useKeyboard == false){
             var rect = game.canvas.getBoundingClientRect();
             game.destinationPoint = this.StWPoint(new Vector2(e.clientX - rect.left, e.clientY - rect.top));
