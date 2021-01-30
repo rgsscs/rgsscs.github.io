@@ -1,0 +1,81 @@
+<html lang="en">
+	<head>
+		<title>RGSS Computer Studies Course Selection Fair</title>
+		<link rel="stylesheet" href="style.css" />
+		<link rel="icon" href="ico.png" />
+		<script src="gym.js"></script>
+		<style>
+			#shoppingCartDisplay {
+				overflow-x: scroll;
+			}
+
+			#shoppingCartDisplay div {
+				margin: 10px;
+				padding: 10px;
+				border-radius: 10px;
+				background-color: var(--bg-dark-color);
+				flex-shrink: 0;
+				transition: all ease-in-out 0.2s;
+				cursor: pointer;
+			}
+
+			#shoppingCartDisplay div:hover {
+				background-color: var(--highlight-color);
+			}
+
+			#shoppingCartDisplay div img {
+				float: left;
+				margin: 3px;
+				margin-right: 10px;
+			}
+
+			#shoppingCartDisplay div h1, #shoppingCartDisplay div p {
+				margin: 3px 10px;
+				padding: 3px;
+				overflow: hidden;
+				flex-shrink: 0;
+			}
+
+			#shoppingCartDisplay div h1 {
+				font-size: 20px;
+			}
+		</style>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<body>
+		<div id="titlebar">
+			<svg id="titleart" width="400" height="100">
+				<polygon points="0,100 100,100 300,0 200,0" , fill="var(--bg-dark-color)"></polygon>
+				<polygon points="150,100 200,100 400,0 350,0" , fill="var(--bg-dark-color)"></polygon>
+			</svg>
+
+			<a href="index.html"><img src="ico.png" id="icon" width="64" height="64" /></a>
+			<h1 id="maintitle">RGSS Computer Studies</h1>
+            <h2 id="pagename">Find out about CS @ RGSS!</h2>
+            
+		</div>
+
+		<div id="content">
+			<div id="contentart">
+				<svg id="contentart" width="200" height="50">
+					<polygon points="0,0 10,10 160,10 190,40 200,40 200,0" , fill="var(--bg-dark-color)"></polygon>
+				</svg>
+			</div>
+
+			<div id="gameContainer" style="display: flex; justify-content: center; margin: 20px 10%; background-color: var(--bg-dark-color); border-radius: 10px; width: 512px;">
+				<canvas width="512" height="384" id="gameCanvas" style="border-radius: 10px;"></canvas>
+			</div>
+			<div id="shoppingCartDisplay" style="display: flex;"></div>
+			<div id="checkoutDisplay" style="height: 0; transition: all ease-out 2s; background-color: var(--bg-dark-color); overflow: hidden;"></div>
+		</div>
+		
+		<div id="footer">
+			<div id="footer-button" onclick="returnToTop()">
+				<svg width="50" height="25">
+					<polygon points="0,25 25,0 50,25" fill="var(--bg-color)"></polygon>
+				</svg>
+			</div>
+			<p>Copyright 2020 Livernet</p>
+		</div>
+	</body>
+</html>
