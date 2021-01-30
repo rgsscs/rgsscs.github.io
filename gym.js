@@ -265,7 +265,6 @@ class Game {
 				600,
 				100,
 				[
-					"Hello, do you want to learn more about ICS4U1? You need to have taken ICS3U1 first.",
                     "The main topic is object-oriented programming. We apply 2D arrays to make games like SimCity and Chess.",
                     "We spend time learning about algorithms: better searches and sorts, recursion and backtracking.",
                     "We also learn about career opportunities, and society impacts of technology."
