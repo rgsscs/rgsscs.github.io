@@ -49,15 +49,21 @@ class Game {
 
         
         this.useKeyboard = false;
+        let screenw = 1024;
+        let screenh = 768;
+        
+        if (window.innerWidth <= 700){
+            screenw = 700
+        }
+        
+        if (window.innerHeight <= 500){
+            screenw = 500;
+        }
+        
+
 
         this.bounds = [new Vector2(), new Vector2(1024, 768)];
 
-        // change canvas size for small screens
-        if (window.outerWidth >= 1024 && window.outerHeight >= 768){
-            gameCanvas.width = window.outerWidth - 20;
-            gameCanvas.height = window.outerHeight - 20;
-        }
-        
 		this.floorTexture = new Image();
 		this.floorTexture.src = "images/floor.png"
 
@@ -150,11 +156,17 @@ class Game {
 				120,
 				300,
 				[
-                    "Why are there only Computer\nStudies teachers at the course\nfair? Is this a sign?",
+                    "Why are there only Computer Studies teachers at the course fair? Is this a sign?",
+                    "I'm in Grade 10, I should take ICS2O1!",
+                    "No wait, I'm GOING to be in Grade 11 next year, I should take ICS3U1!",
+                    "Hold on, it's 2021. I'll be in Grade 12 next year. I should take ICS4U1!",
+                    "No...wait...no... I'm graduating... I shouldn't even be here!?!",
+
+                    /* "Why are there only Computer\nStudies teachers at the course\nfair? Is this a sign?",
                     "I'm in Grade 10, I should\ntake ICS2O1!",
                     "No wait, I'm GOING to be in\nGrade 11 next year, I should\ntake ICS3U1!",
                     "Hold on, it's 2021. I'll\nbe in Grade 12 next year.\nI should take ICS4U1!",
-                    "No...wait...no...\nI'm graduating...\nI shouldn't even be here!?!",
+                    "No...wait...no...\nI'm graduating...\nI shouldn't even be here!?!",*/
 				],
 				function () {
 				},
@@ -170,9 +182,15 @@ class Game {
 				500,
 				[
 					"In Grade 10, take ICS2O1.",
+					"In Grade 11, you have 2 options. ICS3U1 is recommended for many programs, not just computer science.",
+                    "You can also take ICS3C1. I don't recommend it if you've taken or plan to take ICS2O1 though.",
+                    "In Grade 12, you can take ICS4U1. However, Grade 11 ICS3U1 is a prerequisite."
+
+                    /*
+                    "In Grade 10, take ICS2O1.",
 					"In Grade 11, you have 2 options.\nICS3U1 is recommended for many\nprograms, not just computer science.",
                     "You can also take ICS3C1. I don't\nrecommend it if you've taken\nor plan to take ICS2O1 though.",
-                    "In Grade 12, you can take ICS4U1.\nHowever, Grade 11 ICS3U1 is\na prerequisite."
+                    "In Grade 12, you can take ICS4U1.\nHowever, Grade 11 ICS3U1 is\na prerequisite."*/
 				],
 				function() { 
 					//this.walkTo(game.player.position);
@@ -188,10 +206,15 @@ class Game {
 				800,
 				700,
 				[
-					"Hello, do you want to learn\nmore about ICS2O1 and ICS3C1?",
+                    "Hello, do you want to learn more about ICS2O1 and ICS3C1?",
+					"We learn how to make programs using a language named Python.",
+                    "We learn how to make neat games, using Pygame. We make item collection games, and a Zelda-like battle game.",
+                    "We also learn about computer hardware, and how computers impact people, and the environment around us."
+                    
+					/*"Hello, do you want to learn\nmore about ICS2O1 and ICS3C1?",
 					"We learn how to make programs\nusing a language named Python.",
                     "We learn how to make neat games,\nusing Pygame. We make item\ncollection games, and\na Zelda-like battle game.",
-					"We also learn about computer hardware,\nand how computers impact people,\nand the environment around us."
+					"We also learn about computer hardware,\nand how computers impact people,\nand the environment around us."*/
 				],
 				function () {},
 				20,
@@ -212,11 +235,20 @@ class Game {
 				300,
 				100,
 				[
-					"Hello, do you want to learn more\nabout ICS3U1?",
+                    "Hello, do you want to learn more about ICS3U1?",
+					"This year we learned how to make web programs: Basic HTML, JavaScript,and canvas graphics.",
+                    "This year we  learned the skills to make TypeRacer: Arrays, string functions, random numbers.",
+                    "We also learn about array algorithms: searching, data manipulation, sorting.",
+                    "We also learn about computer systems, and how computers impact people, and the environment around us."
+                    
+
+
+
+					/*"Hello, do you want to learn more\nabout ICS3U1?",
 					"This year we learned how to make\nweb programs: Basic HTML,\nJavaScript,and canvas\ngraphics.",
                     "This year we  learned the skills\nto make TypeRacer:\nArrays, string functions,\nrandom numbers.s",
                     "We also learn about array\nalgorithms: searching, data\nmanipulation, sorting.",
-					"We also learn about computer\nsystems, and how computers\nimpact people, and\nthe environment around us."
+					"We also learn about computer\nsystems, and how computers\nimpact people, and\nthe environment around us."*/
 				],
 				function () {},
 				20,
@@ -233,10 +265,15 @@ class Game {
 				600,
 				100,
 				[
-					"Hello, do you want to learn more\nabout ICS4U1? You need to have\ntaken ICS3U1 first.",
+					"Hello, do you want to learn more about ICS4U1? You need to have taken ICS3U1 first.",
+                    "The main topic is object-oriented programming. We do 2D arrays so we can make games like SimCity or Chess.",
+                    "We also spend time learning about algorithms: better searches and sorts, recursion and backtracking.",
+                    "We also learn about career opportunities, and society impacts of technology."
+                    
+                    /*"Hello, do you want to learn more\nabout ICS4U1? You need to have\ntaken ICS3U1 first.",
                     "The main topic is object-oriented\nprogramming. We do 2D arrays\nso we can make games like\nSimCity or Chess.",
                     "We also spend time learning about\nalgorithms: better searches\nand sorts, recursion and\nbacktracking.",
-					"We also learn about career\nopportunities, and society\nimpacts of technology."
+					"We also learn about career\nopportunities, and society\nimpacts of technology."*/
 				],
 				function () {},
 				20,
@@ -366,16 +403,33 @@ class Game {
 			this.ctx.save();
 			this.ctx.beginPath();
 			this.ctx.fillStyle = "hsla(0deg, 0%, 0%, 0.5)"
-			this.ctx.fillRect(20, 20, 472, 100);
+			this.ctx.fillRect(20, 20, 350, 125);
 
 			this.ctx.fillStyle = "#ffffff"
             this.ctx.font = "18pt Courier new";
             
 			let text = String(this.player.targetEntity.getInteractText());
-			let lines = text.split('\n');
-			
-			for ( let i = 0; i < lines.length; i++){
-				this.ctx.fillText(lines[i], 40, 50 + i * 22, 432);
+            let words = text.split(' ');
+            console.log(words);
+			let rowNumber = 0;
+			while ( words.length > 0){
+                let currentLine = '';
+                
+                const MAX_LINE_LENGTH = 22;
+                
+                while (words.length > 0){
+                    
+                    if (currentLine.length + words[0].length <= MAX_LINE_LENGTH){
+                        currentLine += words.shift() + " ";
+                    }
+                    else{
+                        break;
+                    }
+
+                }
+                this.ctx.fillText(currentLine, 40, 50 + rowNumber * 22, 300);
+                rowNumber++;
+                console.log(words);
 			}
 
 			// this.ctx.fillText(this.player.targetEntity.getInteractText(), 40, 50, 432);

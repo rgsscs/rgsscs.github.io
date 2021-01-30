@@ -109,6 +109,41 @@ body {
 	overflow: hidden;
 }
 
+#gameContainer{
+	display: flex; 
+	justify-content: center; 
+	margin: 20px 10%; 
+	background-color: var(--bg-dark-color); 
+	border-radius: 10px; 
+	width: 560px;
+}
+
+@media only screen and (max-width: 700px) {
+	body {
+	   margin: 0;
+	   padding: 0;
+	}
+	#content {
+	   width: 100%;
+	   border-radius: 0px
+	}
+	#titlebar{
+		width: 100%;
+	}
+
+	#maintitle {
+		color: white;
+		display: inline;
+		padding: 0px 0px;
+	}
+	
+	#pagename {
+		color: lightgray;
+		display: inline;
+		padding: 0px 0px;
+	}
+ }
+
 #contentart {
 	margin: 0px;
 	float: right;
