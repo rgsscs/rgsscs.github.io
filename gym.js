@@ -239,9 +239,9 @@ class Game {
 				[
                     "Hello, do you want to learn more ICS3U1? This game was made using many of those concepts.",
 					"This year we learned how to make web programs: Basic HTML, JavaScript,and canvas graphics.",
-                    "We also learned the skills to make TypeRacer: Arrays, string functions, random numbers.",
-                    "We also learn about array algorithms: searching, data manipulation, sorting.",
-                    "We also learn about computer systems, and how computers impact people, and the environment around us."
+                    "We learned the skills to make TypeRacer: Arrays, string functions, random numbers.",
+                    "We learned about array algorithms: searching, data manipulation, sorting.",
+                    "We also learn about computer systems, and their impact on people and the environment around us."
                     
 
 
