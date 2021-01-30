@@ -183,11 +183,14 @@ class Game {
 				600,
 				500,
 				[
-					"In Grade 10, take ICS2O1.",
-					"In Grade 11, you have 2 options. ICS3U1 is recommended for many programs, not just computer science.",
-                    "You can also take ICS3C1. I don't recommend it if you've taken or plan to take ICS2O1 though.",
+                    "In Grade 10, you can take Grade 10 Intro to Computer Studies, ICS2O1.",
+                    "In Grade 11, you have 2 options:  ICS3C1 for college and ICS3U1 for university.",
+                    "You could take ICS3C1. But I don't recommend it if you've taken ICS2O1.",
+                    "The college course ICS3C1 has A LOT of overlap with the Grade 10 ICS2O1.",
+                    "Most beginner students take ICS3U1 Grade 11 Intro to Computer Science.",
+                    "ICS3U1 is recommended for many university programs, not just computer science.",
+                    "You don't need to take Grade 10 computer studies to take Grade 11 computers.",
                     "In Grade 12, you can take ICS4U1. However, Grade 11 ICS3U1 is a prerequisite."
-
                     /*
                     "In Grade 10, take ICS2O1.",
 					"In Grade 11, you have 2 options.\nICS3U1 is recommended for many\nprograms, not just computer science.",
